@@ -57,6 +57,6 @@ describe('BitfinexAdapter', () => {
       caps: args.caps
     })
     expect(authToken).to.eq(generatedAuthToken)
-    expect(expiresAt).to.eq(now + args.ttl)
+    expect(expiresAt).to.eq(1338000)
   })
 })
