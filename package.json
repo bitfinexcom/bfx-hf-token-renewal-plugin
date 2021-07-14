@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "HF plugin to auto manage auth-token renewals",
   "main": "lib/index.js",
+  "engine": {
+    "node": ">=14.6.0"
+  },
   "scripts": {
     "lint": "standard",
     "test": "mocha --recursive test"
@@ -13,6 +16,7 @@
   ],
   "license": "Apache-2.0",
   "dependencies": {
+    "bfx-api-node-rest": "^4.1.2",
     "debug": "^4.3.2",
     "flat-try": "^1.1.1",
     "node-fetch": "^2.6.1"
