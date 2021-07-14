@@ -6,7 +6,7 @@ const { expect } = require('chai')
 const { createSandbox, assert } = require('sinon')
 const proxyquire = require('proxyquire')
 
-const delay = (ms) => new Promise(res => setTimeout(res, ms))
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
 const sandbox = createSandbox()
 const debugStub = sandbox.stub()
