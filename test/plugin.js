@@ -42,7 +42,7 @@ describe('RenewTokenPlugin', () => {
     expect(plugin.id).to.eq('renew-token-plugin')
     expect(plugin.type).to.eq('ws2')
     expect(plugin._timeout).not.to.be.undefined
-    clearTimeout(plugin._timeout)
+    plugin.close()
   })
 
   it('should clean-up after ws:destroyed notification', async () => {
@@ -60,6 +60,7 @@ describe('RenewTokenPlugin', () => {
     expect(nextState).to.eql(state)
 
     assert.notCalled(adapter.refreshToken)
+    plugin.close()
   })
 
   it('immediately renew token if expiresAt is not provided', async () => {
@@ -82,7 +83,7 @@ describe('RenewTokenPlugin', () => {
     assert.calledWithExactly(adapter.refreshToken)
     expect(nextState).to.eql(state)
     expect(plugin._timeout).not.to.be.undefined
-    clearTimeout(plugin._timeout)
+    plugin.close()
   })
 
   it('should handle errors', async () => {
@@ -98,6 +99,6 @@ describe('RenewTokenPlugin', () => {
     assert.calledWithExactly(debugStub, 'failed to renew auth token: %j', fakeErr)
     assert.calledWithExactly(manager.emit, 'plugin:error', '[renew-token-plugin] error: message explaining error')
     expect(plugin._timeout).not.to.be.undefined
-    clearTimeout(plugin._timeout)
+    plugin.close()
   })
 })
