@@ -50,7 +50,7 @@ describe('RenewTokenPlugin', () => {
 
     let nextState = plugin.manager['ws:created']({ id, manager, state })
     expect(plugin._timeout).not.to.be.undefined
-    const managerRef = plugin._algoManagers.get(id)
+    const managerRef = plugin.algoManagers.get(id)
     expect(managerRef).to.be.instanceof(WeakRef)
     expect(managerRef.deref()).to.eql(manager)
     expect(nextState).to.eql(state)
