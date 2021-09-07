@@ -35,7 +35,7 @@ describe('BitfinexAdapter', () => {
     writePermission: false
   }
 
-  it('', async () => {
+  it('should call the api and generate a token', async () => {
     const now = 1000
     sandbox.stub(Date, 'now').returns(now)
     const generatedAuthToken = 'generated auth token'
@@ -58,5 +58,18 @@ describe('BitfinexAdapter', () => {
     })
     expect(authToken).to.eq(generatedAuthToken)
     expect(expiresAt).to.eq(1338000)
+  })
+
+  it('should handle capacity errors', async () => {
+    RestStub.generateToken.rejects(new Error('500 - ["error",null,"ERR_TOKEN_CAPS_POLICY_INVALID"]'))
+
+    const adapter = new BitfinexAdapter(args)
+
+    try {
+      await adapter.refreshToken()
+      assert.fail()
+    } catch (e) {
+      expect(e.message).to.eq('the given API key does not have the required permissions, please make sure to enable "get" and "create" capacities for "Account", "Orders", and "Wallets"')
+    }
   })
 })
