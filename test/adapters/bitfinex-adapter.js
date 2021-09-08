@@ -69,7 +69,7 @@ describe('BitfinexAdapter', () => {
       await adapter.refreshToken()
       assert.fail()
     } catch (e) {
-      expect(e.message).to.eq('the given API key does not have the required permissions, please make sure to enable "get" and "create" capacities for "Account", "Orders", and "Wallets"')
+      expect(e.message).to.eq('The given API key does not have the required permissions, please make sure to enable "get" and "create" capacities for "Account", "Orders", and "Wallets"')
     }
   })
 })
