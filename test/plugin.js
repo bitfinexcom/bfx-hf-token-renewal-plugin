@@ -92,14 +92,16 @@ describe('RenewTokenPlugin', () => {
 
     const config = {
       maxRetries: 3,
-      retryInterval: 10
+      retryInterval: 10,
+      expiresAt: 100
     }
     const plugin = new TokenRenewalPlugin(adapter, config)
+    expect(plugin.expiresAt).to.eq(config.expiresAt)
+
     const manager = { emit: sandbox.stub() }
-
     plugin.manager['ws:created']({ id, manager, state })
-    await delay(100)
 
+    await delay(100)
     assert.callCount(adapter.refreshToken, 4)
     assert.calledWithExactly(debugStub, 'failed to renew auth token: %j', fakeErr)
     assert.calledWithExactly(manager.emit, 'plugin:error', '[renew-token-plugin] error: message explaining error')
