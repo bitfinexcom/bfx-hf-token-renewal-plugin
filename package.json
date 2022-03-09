@@ -1,6 +1,6 @@
 {
   "name": "bfx-hf-token-renewal-plugin",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "HF plugin to auto manage auth-token renewals",
   "main": "lib/index.js",
   "engine": {
